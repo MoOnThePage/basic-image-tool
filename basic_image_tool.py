@@ -5,6 +5,14 @@ import cv2
 asset_folder = "sample_images/"
 output_folder = "output/"
 
+# Image Samples as a list
+images_list = ["alexasfotos.jpg", "alex-souza.jpg","arlindphotography-.jpg", "brongkie-brongkie.jpg", "chevanon-.jpg",
+               "cottonbro.jpg", "d-minh-ha-tu-n-.jpg", "ewei2805.jpg", "fatih-aytekin.jpg", "icon0.jpg", "irina-bekhtereva.jpg",
+               "iriser-.jpg", "jcmotive.jpg", "katierainbow-1.jpg", "katierainbow-2.jpg", "led-supermarket.jpg", "lee-dunican.jpg",
+               "magda-ehlers.jpg", "neosiam.jpg", "ninobur-.jpg", "pixabay-1.jpg", "pixabay-2.jpg", "pixabay-3.jpg", "robert-clark.jpg",
+               "roman-odintsov.jpg", "ryank.jpg", "scholtz-buys.jpg", "spacex-1.jpg", "spacex-2.jpg", "spacex-3.jpg", "syed-abdul-moiz.jpg",
+               "tima-miroshnichenko.jpg", "tswegha.jpg", "visax.jpg", "vladimirsrajber.jpg", "wahyu-widiatmoko.jpg", "zba-banner.jpg"]
+
 # Reading/Loading the image function
 def load_image(image_name):
     """
@@ -130,13 +138,33 @@ def display_image(input_image):
     cv2.destroyAllWindows()
 
 def main():
-    test_load_image = load_image("magda-ehlers.jpg")
-    # test_convert_color_space = convert_color_space(test_load_image, "hsv")
-    # test_resize_image = resize_image(test_load_image)
-    # test_crop_image = crop_image(test_load_image)
-    test_annotate_image = annotate_image(test_load_image, "Image Annotated")
-    display_image(test_annotate_image)
-    save_image("output.jpg", test_load_image)
+    print("=" * 80)
+    print("🖼️ Basic Image Tool - OpenCV Mini Project 😊")
+    print("=" * 80)
+    print("Welcome! This tool lets you perform basic image operations:")
+    print("    [1] Load an image")
+    print("    [1] Display an image")
+    print("    [2] Convert a color space to another color space")
+    print("    [3] Resize an image")
+    print("    [4] Crop an image")
+    print("    [5] Annotate an image")
+    print("    [6] Save an image")
+    print("    [7] Save an image to another format\n\n")
+    print("    [8]")
+    print("    [9]")
+    # while True:
+    #     print("Hi")
+    #     image_index = int(input("Enter image number: "))
+    #     print(images_list[image_index - 1])
+    #     if input("Enter 'q' to quit: ").lower() == "q":
+    #         break
+    # test_load_image = load_image("magda-ehlers.jpg")
+    # # test_convert_color_space = convert_color_space(test_load_image, "hsv")
+    # # test_resize_image = resize_image(test_load_image)
+    # # test_crop_image = crop_image(test_load_image)
+    # test_annotate_image = annotate_image(test_load_image, "Image Annotated")
+    # display_image(test_annotate_image)
+    # save_image("output.jpg", test_load_image)
 
 
 if __name__ == "__main__":
