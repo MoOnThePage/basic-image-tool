@@ -11,7 +11,7 @@ Started with Images** from OpenCV University "_Mastering OpenCV with Python_"
 course.
 
 ## Project Goals
-Create a hands-hon tool that helps beginners:
+Create a hands-on tool that helps beginners:
 - Load and display images
 - Apply basic operations such as:
   - Convert color / grayscale
