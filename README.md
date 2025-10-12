@@ -1,7 +1,7 @@
 # Basic Image Tool - Mini Image Processing App (OpenCV + Python)
 
 ## Project Overview
-**Basic Image Tool** is a beginner-friendly image process project
+**Basic Image Tool** is a beginner-friendly image processing project
 built with Python and OpenCV. It provides a simple command-line interface
 that allows users to perform essential image operations, from loading and
 editing images to saving them in different formats.
