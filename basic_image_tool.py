@@ -1,9 +1,22 @@
 # loading the needed libraries
 import cv2
+import numpy as np
+
+# image global variable
+img = np.zeros((512,512,3), np.uint8)
 
 # Constant Variables
-asset_folder = "sample_images/"
-output_folder = "output/"
+asset_folder = "sample_images/" # image samples directory
+output_folder = "output/" # output folder
+
+# Constant Variable for terminal colors
+BLUE = "\033[94m"
+GREEN = "\033[92m"
+RED = "\033[91m"
+YELLOW = "\033[93m"
+CYAN = "\033[96m"
+BOLD = "\033[1m"
+RESET = "\033[0m"
 
 # Image Samples as a list
 images_list = ["alexasfotos.jpg", "alex-souza.jpg","arlindphotography-.jpg", "brongkie-brongkie.jpg", "chevanon-.jpg",
@@ -43,6 +56,11 @@ def save_image(image_name, image_handler):
     cv2.imwrite(image_to_save, image_handler)
     print(f"Image saved to {image_to_save}")
 
+    # Show the saved image
+    cv2.imshow("Saved Image Preview", image_handler)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
 # Color space conversion function
 def convert_color_space(input_image, color_space):
     """
@@ -51,11 +69,14 @@ def convert_color_space(input_image, color_space):
     :param color_space:
     :return: new color space
     """
-    if color_space == "gray": # convert to grayscale
+    if color_space == '1': # convert to grayscale
+        print("Converting from BGR to GRAY")
         return cv2.cvtColor(input_image, cv2.COLOR_BGR2GRAY)
-    elif color_space == "hsv": # convert to hsv
+    elif color_space == '2': # convert to hsv
+        print("Converting from BGR to HSV")
         return cv2.cvtColor(input_image, cv2.COLOR_BGR2HSV)
-    elif color_space == "lab": # convert to lab
+    elif color_space == '3': # convert to lab
+        print("Converting from BGR to LAB")
         return cv2.cvtColor(input_image, cv2.COLOR_BGR2LAB)
     else:
         print(f"Error: {color_space} is not a valid color space.")
@@ -137,35 +158,78 @@ def display_image(input_image):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-def main():
+def print_greeting_message():
+    print(BOLD + CYAN + "=" * 80 + RESET)
+    print("🖼️ Basic Image Tool - OpenCV Mini Project 😊" + RESET)
     print("=" * 80)
-    print("🖼️ Basic Image Tool - OpenCV Mini Project 😊")
-    print("=" * 80)
-    print("Welcome! This tool lets you perform basic image operations:")
-    print("    [1] Load an image")
-    print("    [1] Display an image")
-    print("    [2] Convert a color space to another color space")
-    print("    [3] Resize an image")
-    print("    [4] Crop an image")
-    print("    [5] Annotate an image")
-    print("    [6] Save an image")
-    print("    [7] Save an image to another format\n\n")
-    print("    [8]")
-    print("    [9]")
-    # while True:
-    #     print("Hi")
-    #     image_index = int(input("Enter image number: "))
-    #     print(images_list[image_index - 1])
-    #     if input("Enter 'q' to quit: ").lower() == "q":
-    #         break
-    # test_load_image = load_image("magda-ehlers.jpg")
-    # # test_convert_color_space = convert_color_space(test_load_image, "hsv")
-    # # test_resize_image = resize_image(test_load_image)
-    # # test_crop_image = crop_image(test_load_image)
-    # test_annotate_image = annotate_image(test_load_image, "Image Annotated")
-    # display_image(test_annotate_image)
-    # save_image("output.jpg", test_load_image)
+    print(BLUE + "Welcome!" + RESET + " This tool lets you perform basic image operations:")
+    print(YELLOW + "\t[1] " + RESET + "Load an image")
+    print(YELLOW + "\t[2] " + RESET + "Display an image")
+    print(YELLOW + "\t[3] " + RESET + "Convert a color space to another color space")
+    print(YELLOW + "\t[4] " + RESET + "Resize an image")
+    print(YELLOW + "\t[5] " + RESET + "Crop an image")
+    print(YELLOW + "\t[6] " + RESET + "Annotate an image")
+    print(YELLOW + "\t[7] " + RESET + "Save an image")
+    print(YELLOW + "\t[8] " + RESET + "Save an image to another format\n\n")
+    print(YELLOW + "    👉 Type the number of the actio you want to perform: " + RESET)
+    print(YELLOW + "    👉 Type 'q' to quit" + RESET)
+    print(BOLD + CYAN + "=" * 80 + RESET)
 
+def main():
+    global img
+    print_greeting_message()
+    while True:
+        user_input = input("Enter number of operations: ").strip().lower()
+        if user_input == 'q':
+            print("Thank you for using Basic Image Tool.!\nHave a nice day!")
+            break
+        elif user_input == '1': # Load an image from sample image list
+            print("Loading an image...")
+            index = int(input("Pick a number between 1 and 37, to select an image: "))
+            img = load_image(images_list[index - 1])
+            continue
+        elif user_input == '2': # Display the loaded image or the as is or after an operation
+            display_image(img)
+            continue
+        elif user_input == '3': # convert color space
+            print(BOLD + CYAN + "-" * 50 + RESET)
+            print(BOLD + RED + "CONVERT COLOR SPACE OPERATION" + RESET)
+            print(BLUE + "\n\nSelect between 3 options:" + RESET)
+            print(YELLOW + "\t[1] " + RESET + "Gray Color Space")
+            print(YELLOW + "\t[2] " + RESET + "HSV Color Space")
+            print(YELLOW + "\t[3] " + RESET + "LAB Color Space")
+            print(BOLD + CYAN + "-" * 50 + RESET)
+            operation_number = input("Select an operation: ")
+            img = convert_color_space(img, operation_number)
+            continue
+        elif user_input == '4': #resize the image
+            print("Image Resizing...")
+            img = resize_image(img)
+            continue
+        elif user_input == '5': # crop the image
+            print("Image Cropping...")
+            img = crop_image(img)
+            continue
+        elif user_input == '6': # annotate the image
+            print("Annotate an image...")
+            img = annotate_image(img, "Image Annotated")
+            continue
+        elif user_input == '7': # save the image
+            save_image("output.jpg", img)
+            continue
+        elif user_input == '8': # save in another formate
+            print(BOLD + CYAN + "*" * 50 + RESET)
+            print(BOLD + RED + "Convert the image to another format and save it" + RESET)
+            print(BLUE + "\n\nCurrently it only support PNG:" + RESET)
+            print(YELLOW + "\t[1] " + RESET + "Convert to PNG")
+            # print(YELLOW + "\t[2] " + RESET + "HSV Color Space")
+            # print(YELLOW + "\t[3] " + RESET + "LAB Color Space")
+            print(BOLD + CYAN + "*" * 50 + RESET)
+            operation_number = input("Select an operation: ")
+            save_image("output.png", img)
+            continue
+        else:
+            print("⚠️ Invalid choice. Please try again.")
 
 if __name__ == "__main__":
     main()
