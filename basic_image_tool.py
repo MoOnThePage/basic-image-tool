@@ -181,7 +181,8 @@ def annotate_image(input_image, text, position = 0, color = (0,255,0), size = 5)
 # Image Display function and wait for the ESC key to be pressed
 def display_image(input_image):
     # Display the image to the window
-    cv2.imshow("image", input_image)
+    cv2.namedWindow("Image Display", cv2.WINDOW_NORMAL)
+    cv2.imshow("Image Display", input_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
