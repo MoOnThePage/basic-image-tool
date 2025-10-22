@@ -186,6 +186,19 @@ def display_image(input_image):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+# Image Brightness Control Function
+def brightness_control(img, value, operation):
+    if operation == '+':
+        result = cv2.add(img, value)
+    else:
+        result = cv2.subtract(img, value)
+    return result
+
+# Image Contrast Control Function
+def contrast_control(img, value):
+    result = cv2.multiply(img, value)
+    return result
+
 def print_greeting_message():
     print(BOLD + CYAN + "=" * 80 + RESET)
     print("🖼️ Basic Image Tool - OpenCV Mini Project 😊" + RESET)
@@ -193,12 +206,14 @@ def print_greeting_message():
     print(BLUE + "Welcome!" + RESET + " This tool lets you perform basic image operations:")
     print(YELLOW + "\t[1] " + RESET + "Load an image")
     print(YELLOW + "\t[2] " + RESET + "Display an image")
-    print(YELLOW + "\t[3] " + RESET + "Convert a color space to another color space")
-    print(YELLOW + "\t[4] " + RESET + "Resize an image")
-    print(YELLOW + "\t[5] " + RESET + "Crop an image")
-    print(YELLOW + "\t[6] " + RESET + "Annotate an image")
-    print(YELLOW + "\t[7] " + RESET + "Save an image")
-    print(YELLOW + "\t[8] " + RESET + "Save an image to another format\n\n")
+    print(YELLOW + "\t[3] " + RESET + "Control Contrast")
+    print(YELLOW + "\t[4] " + RESET + "Control Brightness")
+    print(YELLOW + "\t[5] " + RESET + "Convert a color space to another color space")
+    print(YELLOW + "\t[6] " + RESET + "Resize an image")
+    print(YELLOW + "\t[7] " + RESET + "Crop an image")
+    print(YELLOW + "\t[8] " + RESET + "Annotate an image")
+    print(YELLOW + "\t[9] " + RESET + "Save an image")
+    print(YELLOW + "\t[10] " + RESET + "Save an image to another format\n\n")
     print(YELLOW + "    👉 Type the number of the actio you want to perform: " + RESET)
     print(YELLOW + "    👉 Type 'q' to quit" + RESET)
     print(BOLD + CYAN + "=" * 80 + RESET)
@@ -219,7 +234,24 @@ def main():
         elif user_input == '2': # Display the loaded image or the as is or after an operation
             display_image(img)
             continue
-        elif user_input == '3': # convert color space
+        elif user_input == '3': # Change the image contrast based on a given value
+            print(BOLD + CYAN + "-" * 50 + RESET)
+            print(BOLD + RED + "Contrast Control" + RESET)
+            print(BLUE + "\n\nSet the value of contrast between 0.5 and 2.0" + RESET)
+            print(BOLD + CYAN + "-" * 50 + RESET)
+            contrast_value = float(input("Contrast value: "))
+            img = contrast_control(img, contrast_value)
+            continue
+        elif user_input == '4': # Change the image brightness based on a given value
+            print(BOLD + CYAN + "-" * 50 + RESET)
+            print(BOLD + RED + "Brightness Control" + RESET)
+            print(BLUE + "\n\nSet the value of brightness between 1 and 255" + RESET)
+            print(BOLD + CYAN + "-" * 50 + RESET)
+            brightness_value = float(input("Brightness value: "))
+            inc_dec = input("+ for increase, - for decrease: ")
+            img = brightness_control(img, brightness_value, inc_dec)
+            continue
+        elif user_input == '5': # convert color space
             print(BOLD + CYAN + "-" * 50 + RESET)
             print(BOLD + RED + "CONVERT COLOR SPACE OPERATION" + RESET)
             print(BLUE + "\n\nSelect between 3 options:" + RESET)
@@ -230,22 +262,22 @@ def main():
             operation_number = input("Select an operation: ")
             img = convert_color_space(img, operation_number)
             continue
-        elif user_input == '4': #resize the image
+        elif user_input == '6': #resize the image
             print("Image Resizing...")
             img = resize_image(img)
             continue
-        elif user_input == '5': # crop the image
+        elif user_input == '7': # crop the image
             print("Image Cropping...")
             img = crop_image(img)
             continue
-        elif user_input == '6': # annotate the image
+        elif user_input == '8': # annotate the image
             print("Annotate an image...")
             img = annotate_image(img, "Image Annotated")
             continue
-        elif user_input == '7': # save the image
+        elif user_input == '9': # save the image
             save_image("output.jpg", img)
             continue
-        elif user_input == '8': # save in another formate
+        elif user_input == '10': # save in another formate
             print(BOLD + CYAN + "*" * 50 + RESET)
             print(BOLD + RED + "Convert the image to another format and save it" + RESET)
             print(BLUE + "\n\nCurrently it only support PNG:" + RESET)
