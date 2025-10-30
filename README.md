@@ -129,6 +129,3 @@ non-commercial purpose only. Check out the `CREDITS.md` file to know more about 
 **Active Development** - Currently implementing Module 2 concepts and preparing for Module 3.
 
 Last Update: Wednesday, October 22, 2025
-
-
-# Testing Git settings
