@@ -63,6 +63,11 @@ than Pythons's native operators.
 - Saturation handling and pixels value clipping
 - Understanding scalar vs. matrix operations
 
+### Module 3 Concepts
+- Histogram: not implemented may not be needed
+- Histogram Equalization: not implemented may be needed
+- Color Segmentation: not implemented may be needed
+
 ## Tech Stack
 - Programming Langauge: Python 3.xx
 - Libraries: OpenCV (cv2), NumPy
@@ -119,7 +124,7 @@ than Pythons's native operators.
 This project is inspired by following the curriculum of:
 > **Course**: Mastering OpenCV with Python  
 > **Platform**: [OpenCV University](https://opencv.org/university/)  
-> **Current Progress**: Module 2 - Basic Image Manipulation
+> **Current Progress**: Module 3 - Histogram and Color Segmentation
 
 ## Images Credits
 All sample images used in this project are from [Pexels.com](https://www.pexels.com/). They are used for educational and 
@@ -128,4 +133,4 @@ non-commercial purpose only. Check out the `CREDITS.md` file to know more about 
 ## Project Status
 **Active Development** - Currently implementing Module 2 concepts and preparing for Module 3.
 
-Last Update: Wednesday, October 22, 2025
+Last Update: Saturday, November 01, 2025

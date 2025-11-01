@@ -2,6 +2,9 @@
 import cv2
 import numpy as np
 
+# modules
+from image_resize_utils import resize_image
+
 # image global variable
 img = np.zeros((512,512,3), np.uint8)
 
@@ -81,52 +84,6 @@ def convert_color_space(input_image, color_space):
     else:
         print(f"Error: {color_space} is not a valid color space.")
         return input_image
-
-# Resize Image Function.
-# Currently, this function will resize any image size to instagram's
-# vertical post (1080x1350 px) while maintaining the aspect ratio of
-# the image.
-# TODO: Adding more resizing option; at first try add ready resizing
-#       template, like other instagram post, and other social media
-#       platforms, I think this is useful. Ultimately it should have
-#       the template + the free resizing for other purposes.
-def resize_image(input_image, target_width = 1080, target_height = 1350):
-    """
-    Resize image to Instagram vertical post size (1080x1350px) while
-    maintaining aspect ratio and padding if necessary.
-    :param input_image: Input image (OpenCV format)
-    :param target_width: Target image width (default 1080 px)
-    :param target_height: Target image height (default 1350 px)
-    :return: Resized and padded image
-    """
-
-    # Calculate aspect ration
-    img_height, img_width = input_image.shape[:2]
-    img_ratio = img_width / img_height
-    target_ratio = target_width / target_height
-
-    # Resize the image to fit target dimensions while maintaining aspect ratio
-    if img_ratio > target_ratio: # image is wider than target -> fit to width
-        new_width = target_width
-        new_height = int(target_width / img_ratio)
-    else: # Image is taller than target -> fit to height
-        new_height = target_height
-        new_width = int(target_height * img_ratio)
-
-    # Resize action
-    resized_img = cv2.resize(input_image, (new_width, new_height), interpolation = cv2.INTER_AREA)
-
-    # Created a blank canvas with target size
-    result = np.full((target_height, target_width, 3), (0, 0, 0), dtype = np.uint8)
-
-    # calculate position to center the resized image
-    offset_x = (target_width - new_width) // 2
-    offset_y = (target_height - new_height) // 2
-
-    # Place the image in the center
-    result[offset_y:offset_y + new_height, offset_x:offset_x + new_width] = resized_img
-
-    return result
 
 # Crop the image
 # TODO: currently this function crops the image to the center.
