@@ -1,4 +1,5 @@
 # loading the needed libraries
+import os
 import cv2
 import numpy as np
 
@@ -21,24 +22,24 @@ CYAN = "\033[96m"
 BOLD = "\033[1m"
 RESET = "\033[0m"
 
-# Image Samples as a list
-images_list = ["alexasfotos.jpg", "alex-souza.jpg","arlindphotography-.jpg", "brongkie-brongkie.jpg", "chevanon-.jpg",
-               "cottonbro.jpg", "d-minh-ha-tu-n-.jpg", "ewei2805.jpg", "fatih-aytekin.jpg", "icon0.jpg", "irina-bekhtereva.jpg",
-               "iriser-.jpg", "jcmotive.jpg", "katierainbow-1.jpg", "katierainbow-2.jpg", "led-supermarket.jpg", "lee-dunican.jpg",
-               "magda-ehlers.jpg", "neosiam.jpg", "ninobur-.jpg", "pixabay-1.jpg", "pixabay-2.jpg", "pixabay-3.jpg", "robert-clark.jpg",
-               "roman-odintsov.jpg", "ryank.jpg", "scholtz-buys.jpg", "spacex-1.jpg", "spacex-2.jpg", "spacex-3.jpg", "syed-abdul-moiz.jpg",
-               "tima-miroshnichenko.jpg", "tswegha.jpg", "visax.jpg", "vladimirsrajber.jpg", "wahyu-widiatmoko.jpg", "zba-banner.jpg"]
-
 # Reading/Loading the image function
+# TODO: implement file brows and elect operation
+# TODO: apply numbered selection
+# TODO: add navigation
+# TODO: add multiple file selection
+# TODO: brows with Filtering
 def load_image(image_name):
     """
-    Load an image from the given path
+    Load an image from a given index
 
     :param image_name:
-    :return: Numpy array "image_handler"
+    :return: the loaded image
     """
-    image_to_process = asset_folder + image_name
-    image_handler = cv2.imread(image_to_process)
+
+    images = os.listdir(asset_folder) # Image Samples as a list by listing the content of the asset_folder
+    image_to_process = images[image_name] # Select the image based on the user input
+    image_handler = cv2.imread(asset_folder + image_to_process) # Read the image
+
     # Check if the image is loaded or not
     if image_handler is None:
         print(f"Error: {image_to_process} is not a valid image could not be loaded.")
@@ -183,10 +184,12 @@ def main():
         if user_input == 'q':
             print("Thank you for using Basic Image Tool.!\nHave a nice day!")
             break
+        # TODO: Fixing the file selection process
+        # TODO: Add file browse and select operation
         elif user_input == '1': # Load an image from sample image list
             print("Loading an image...")
             index = int(input("Pick a number between 1 and 37, to select an image: "))
-            img = load_image(images_list[index - 1])
+            img = load_image(index - 1)
             continue
         elif user_input == '2': # Display the loaded image or the as is or after an operation
             display_image(img)
