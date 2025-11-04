@@ -1,16 +1,15 @@
 # loading the needed libraries
-import os
 import cv2
 import numpy as np
 
 # modules
 from image_resize_utils import resize_image
+from image_IO import load_image
 
 # image global variable
 img = np.zeros((512,512,3), np.uint8)
 
 # Constant Variables
-asset_folder = "sample_images/" # image samples directory
 output_folder = "output/" # output folder
 
 # Constant Variable for terminal colors
@@ -22,33 +21,8 @@ CYAN = "\033[96m"
 BOLD = "\033[1m"
 RESET = "\033[0m"
 
-# Reading/Loading the image function
-# TODO: implement file brows and elect operation
-# TODO: apply numbered selection
-# TODO: add navigation
-# TODO: add multiple file selection
-# TODO: brows with Filtering
-def load_image(image_name):
-    """
-    Load an image from a given index
-
-    :param image_name:
-    :return: the loaded image
-    """
-
-    images = os.listdir(asset_folder) # Image Samples as a list by listing the content of the asset_folder
-    image_to_process = images[image_name] # Select the image based on the user input
-    image_handler = cv2.imread(asset_folder + image_to_process) # Read the image
-
-    # Check if the image is loaded or not
-    if image_handler is None:
-        print(f"Error: {image_to_process} is not a valid image could not be loaded.")
-        exit()
-    else:
-        print("Image loaded successfully.")
-        return image_handler
-
 # Saving the image as is
+# TODO: Add to the image_IO module and fix
 def save_image(image_name, image_handler):
     """
     Save an image from the given path
@@ -188,8 +162,7 @@ def main():
         # TODO: Add file browse and select operation
         elif user_input == '1': # Load an image from sample image list
             print("Loading an image...")
-            index = int(input("Pick a number between 1 and 37, to select an image: "))
-            img = load_image(index - 1)
+            img = load_image()
             continue
         elif user_input == '2': # Display the loaded image or the as is or after an operation
             display_image(img)

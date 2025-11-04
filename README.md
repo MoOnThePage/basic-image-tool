@@ -9,82 +9,25 @@ This project was developed as a practical application of the **Mastering OpenCV 
 evolving through learning modules as new concepts are learned and applied.
 
 ## Project Goals
-Create a hands-on tool that helps beginners:
-- Load and display images with propper window controls
-- Apply basic operations such as:
-  - Convert color / grayscale
-  - Adjust brightness and contrast
-  - Crop and resize
-  - Annotate (draw shapes, add text)
-  - Save images or export to a new formate (e.g., .jpg ➡️ .png)
-- Understand how OpenCV handles image data, color spaces, pixel operations, and file I/O.
-
-## Project Evolution
-
-### Module 1: Getting Started with Images (Foundation)
-Initial version focused on fundamental image operations:
-- Loading, displaying, and saving images
-- Color space conversions (BGR, Grayscale, HSV, LAB)
-- Basic resizing with aspect ratio preservation
-- Center cropping
-- Text annotation
-- Format conversion
-
-**Key Concepts**: Image I/O, NumPy arrays, color spaces, basic transformations
-
-### Module 2: Basic Image Manipulation (Current)
-After completing Module 2, the tool expanded to include:
-- Brightness Control: Adjust image brightness using `cv2.add()` and `cv2.subtract()`
-  - Understanding additive pixel operations
-  - Proper saturation handling (0-255 clipping)
-- Contrast Control: Modify image contrast using `cv2.multiply()`
-  - Understanding multiplicative scaling
-  - Proportional vs uniform pixel adjustments
-- Improved Display Management: Better window control with `cv2.namedWindow()` and `cv2.WINDOW_NORMAL`
-  - Resizable windows
-  - Controlled display sizes
-
-**Key Learning**: Understanding the fundamental difference between additive operations (brightness - uniform change) and
-multiplicative operations (contrast - proportional change), and why OpenCV's arithmetic functions handle saturation better
-than Pythons's native operators.
-
-## Concepts Demonstrated
-### Module 1 Concepts
-- Image reading & writing: `cv2.imread()`, `cv2.imwrite()`
-- Color space conversion: `cv2.cvtColor()`
-- Resizing: `cv2.resize()`
-- Cropping: Numpy array slicing
-- Drawing and annotation: `cv2.putText()`, `cv2.rectangle()`, `cv2.circle()`
-- Format conversion: `.jpg` ➡️ `.png`
-
-### Module 2 Concepts
-- Brightness adjustment: `cv2.add()`, `cv2.subtract()`
-- Contrast adjustment: `cv2.multiply()`
-- Saturation handling and pixels value clipping
-- Understanding scalar vs. matrix operations
-
-### Module 3 Concepts
-- Histogram: not implemented may not be needed
-- Histogram Equalization: not implemented may be needed
-- Color Segmentation: not implemented may be needed
+- Provide a practical way for learner to experiment with OpenCV.
+- Demonstrate fundamental image operations in a runnable tool.
+- Build clean, modular, and maintainable code, starting from scripts toward structured software
 
 ## Tech Stack
 - Programming Langauge: Python 3.xx
 - Libraries: OpenCV (cv2), NumPy
 - Platform: Command Line (CLI)
-- Future: GUI version with Tkinter, PyQt or PySide
+- Future: GUI version with PySide using Qt Creator
 
 ## Features
-- Load images from a curated sample collection
-- Display images with controlled window sizing
-- Convert between multiple color spaces
-- Adjust image brightness
-- Adjust image contrast
-- Resize images to Instagram vertical post format (1080x1350)
-- Center crop with 80% retention
+- Interactive file browser, dynamically list images from the "sample_images/" directory
+- Convert between color spaces (BGR, Grayscale, HSV, LAB)
+- Resize images
+- Center crop
 - Add text annotations
-- Save processed images
-- Export to different formats
+- Save or export to different formats
+
+> All operations are applied toa single image in the memory and previewed via resizable OpenCV windows.
 
 ## How to USE
 1. Clone the repository
@@ -106,31 +49,34 @@ than Pythons's native operators.
 [9] Save an image
 [10] Save an image to another format
 ```
+## Project Current Structure
+- `basic_image_tool.py` - main CLI interface
+- `image_IO.py` - image loading with dynamic file browser
+- `image_resize_utils.py` - modular resize functions
+
+> The code is being refactored incrementally to support futures like batch processing, filters, and GUI.
 
 ## Future Improvements
-- [x] Brightness and contrast controls
-- [x] Improved display window management
-- Add image filters and effects (blur, sharpen, edge detection)
+- Add common image filters (blur, sharpen, edge detection)
 - Implement histogram equalization
-- Add batch processing for multiple images
-- Integrate file explorer for easier navigation
-- Channel-specific adjustments (suing tuples for pre-channel control)
-- Region-specific adjustments (using matrices for spatial control)
-- Build GUI interface
-- Add before/after comparison view
-- Implement undo/redo functionality
+- Support batch processing
+- Replace hardcoded paths with user-configurable directions
+- Add channel-and region-specific adjustments
+- Build a GUI version
+- Implement undo/redo and before/after preview
 
 ## Learning Resources
 This project is inspired by following the curriculum of:
 > **Course**: Mastering OpenCV with Python  
 > **Platform**: [OpenCV University](https://opencv.org/university/)  
-> **Current Progress**: Module 3 - Histogram and Color Segmentation
+> **Current Progress**: Completed Modules 1 - 3, Now exploring Module 4 - Video Processing and Analysis in a new project
 
 ## Images Credits
 All sample images used in this project are from [Pexels.com](https://www.pexels.com/). They are used for educational and 
 non-commercial purpose only. Check out the `CREDITS.md` file to know more about each image.
 
 ## Project Status
-**Active Development** - Currently implementing Module 2 concepts and preparing for Module 3.
+**Active Development** - Core image operations are implemented and modularized
+**Next** - Building a video processing tool to apply Module 4 concepts.
 
-Last Update: Saturday, November 01, 2025
+Last Update: Tuesday, November 04, 2025
