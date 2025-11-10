@@ -20,7 +20,7 @@ evolving through learning modules as new concepts are learned and applied.
 - Future: GUI version with PySide using Qt Creator
 
 ## Features
-- Interactive file browser, dynamically list images from the "sample_images/" directory
+- Interactive file browser, navigate directories and select images
 - Convert between color spaces (BGR, Grayscale, HSV, LAB)
 - Resize images
 - Center crop
@@ -79,4 +79,4 @@ non-commercial purpose only. Check out the `CREDITS.md` file to know more about 
 **Active Development** - Core image operations are implemented and modularized
 **Next** - Building a video processing tool to apply Module 4 concepts.
 
-Last Update: Tuesday, November 04, 2025
+Last Update: Monday, November 10, 2025

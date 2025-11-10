@@ -1,48 +1,80 @@
 # Reading/Loading the image function
-# TODO: add navigation
-# TODO: add multiple file selection
-# TODO: brows with Filtering
 
 import os
+from pathlib import Path
 import cv2
 
-# Constant Variables
-asset_folder = "sample_images/" # image samples directory
 
-def file_browser(asset_folder):
+def fileBrowser(startDirectory = '.'):
     """
-    list the files (images) in a given directory
-    :param asset_folder:
-    :return: image to be loaded
+    FIle Browser with Navigation
+    :param startDirectory:
+    :return: selected image
     """
+    currentDirectory = Path(startDirectory).resolve()
 
-    files = os.listdir(asset_folder)
+    while True:
+        print('\033[2J\033[H', end='')  # clear screen
 
-    print("Available files:")
-    for index, file in enumerate(files, 1):
-        print(f"[{index}] - {file}")
+        print(f"Current directory: {currentDirectory}")
+        print('-' * 50)
 
-    try:
-        choice = int(input("\nEnter file number: ")) - 1
-        if 0 <= choice < len(files):
-            return files[choice]
-        else:
-            print("Invalid selection!")
-            return None
-    except ValueError:
-        print("Pleas enter a valid file number!")
-        return None
+        # Get items and separate files from directories
+        items = os.listdir(currentDirectory)
+        directories = []
+        files = []
 
-def load_image():
+        for item in items:
+            itemPath = currentDirectory / item
+            if itemPath.is_dir():
+                directories.append(item)
+            else:
+                files.append(item)
+
+        # Display directory first
+        print("\nDirectories:")
+        for i, directoryName in enumerate(directories, 1):
+            print(f"{i}. {directoryName}/")
+
+        # Display files
+        print("\nFiles:")
+        for i, fileName in enumerate(files, len(directories) + 1):
+            print(f"{i}. {fileName}")
+
+        print(f"\n{len(directories) + len(files) + 1}. Go Up")
+        print(f"\n{len(directories) + len(files) + 2}. Exit browser")
+
+        try:
+            choice = int(input("\nEnter your choice: "))
+            if choice == len(directories) + len(files) + 1:
+                # Go Up
+                currentDirectory = currentDirectory.parent
+            elif choice == len(directories) + len(files) + 2:
+                # Exit
+                return None
+            elif 1 <= choice <= len(directories):
+                # Select directory
+                selectedDirectory = directories[choice - 1]
+                currentDirectory = currentDirectory / selectedDirectory
+            elif len(directories) < choice <= len(directories) + len(files):
+                # Select File
+                selectedFile = files[choice - len(directories) - 1]
+                return currentDirectory / selectedFile
+            else:
+                input("Invalid choice! Press Enter to continue...")
+        except ValueError:
+            input("Pleas enter a valid number! Press Enter to continue...")
+
+def loadImage():
     """
     Load an image from a given index
 
     :return: the loaded image
     """
 
-    image_to_process = file_browser(asset_folder)
+    image_to_process = fileBrowser()
     print(image_to_process)
-    image_handler = cv2.imread(asset_folder + image_to_process)
+    image_handler = cv2.imread(image_to_process)
 
     # Check if the image is loaded or not
     if image_handler is None:

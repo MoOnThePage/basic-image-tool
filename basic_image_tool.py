@@ -4,7 +4,7 @@ import numpy as np
 
 # modules
 from image_resize_utils import resize_image
-from image_IO import load_image
+from image_IO import loadImage
 
 # image global variable
 img = np.zeros((512,512,3), np.uint8)
@@ -162,7 +162,7 @@ def main():
         # TODO: Add file browse and select operation
         elif user_input == '1': # Load an image from sample image list
             print("Loading an image...")
-            img = load_image()
+            img = loadImage()
             continue
         elif user_input == '2': # Display the loaded image or the as is or after an operation
             display_image(img)
