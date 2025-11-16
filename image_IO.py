@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 import cv2
 
-
+# Dynamic file browser function
 def fileBrowser(startDirectory = '.'):
     """
     FIle Browser with Navigation
@@ -65,6 +65,7 @@ def fileBrowser(startDirectory = '.'):
         except ValueError:
             input("Pleas enter a valid number! Press Enter to continue...")
 
+# Image loading function
 def loadImage():
     """
     Load an image from a given index
@@ -83,3 +84,24 @@ def loadImage():
     else:
         print("Image loaded successfully.")
         return image_handler
+
+# Image saving function
+
+# Constant Variables
+output_folder = "output/" # output folder TODO: integrate with the file browser
+# TODO add the ability to save to another format
+def save_image(image_name, image_handler):
+    """
+    Save an image from the given path
+    :param image_name:
+    :param image_handler:
+    :return: void
+    """
+    image_to_save = output_folder + image_name
+    cv2.imwrite(image_to_save, image_handler)
+    print(f"Image saved to {image_to_save}")
+
+    # Show the saved image
+    cv2.imshow("Saved Image Preview", image_handler)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

@@ -4,13 +4,10 @@ import numpy as np
 
 # modules
 from image_resize_utils import resize_image
-from image_IO import loadImage
+from image_IO import loadImage, save_image
 
 # image global variable
 img = np.zeros((512,512,3), np.uint8)
-
-# Constant Variables
-output_folder = "output/" # output folder
 
 # Constant Variable for terminal colors
 BLUE = "\033[94m"
@@ -21,24 +18,7 @@ CYAN = "\033[96m"
 BOLD = "\033[1m"
 RESET = "\033[0m"
 
-# Saving the image as is
-# TODO: Add to the image_IO module and fix
-def save_image(image_name, image_handler):
-    """
-    Save an image from the given path
-    :param image_name:
-    :param image_handler:
-    :return: void
-    """
-    image_to_save = output_folder + image_name
-    cv2.imwrite(image_to_save, image_handler)
-    print(f"Image saved to {image_to_save}")
-
-    # Show the saved image
-    cv2.imshow("Saved Image Preview", image_handler)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
+# TODO create module called color_spaces_converter.py add the function to it
 # Color space conversion function
 def convert_color_space(input_image, color_space):
     """
@@ -109,7 +89,7 @@ def annotate_image(input_image, text, position = 0, color = (0,255,0), size = 5)
     position  = (int(input_image.shape[1]/2),int(input_image.shape[0]/2))
     return cv2.putText(input_image, text, position, cv2.FONT_HERSHEY_SIMPLEX, size, color, 10)
 
-
+# TODO add to image_IO.py
 # Image Display function and wait for the ESC key to be pressed
 def display_image(input_image):
     # Display the image to the window
@@ -118,6 +98,7 @@ def display_image(input_image):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+# TODO: create a module named image_utils.py and add the function to it
 # Image Brightness Control Function
 def brightness_control(img, value, operation):
     if operation == '+':
@@ -126,6 +107,7 @@ def brightness_control(img, value, operation):
         result = cv2.subtract(img, value)
     return result
 
+# TODO: Add the function to image_utils.y module
 # Image Contrast Control Function
 def contrast_control(img, value):
     result = cv2.multiply(img, value)
